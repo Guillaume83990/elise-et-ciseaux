@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Élise & Ciseaux – Salon de coiffure à Cogolin. Coupe, coloration, soins capillaires sur mesure. Prenez rendez-vous en ligne." />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Élise & Ciseaux — Salon de Coiffure à Cogolin" />
+    <meta property="og:description"
+        content="Coupe, coloration, soins. Salon chaleureux au cœur de Cogolin, Golfe de Saint-Tropez." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Élise & Ciseaux",
+    "description": "Salon de coiffure à Cogolin, Golfe de Saint-Tropez",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "12 rue du Marché",
+      "addressLocality": "Cogolin",
+      "postalCode": "83310",
+      "addressCountry": "FR"
+    },
+    "telephone": "+33494561234",
+    "openingHours": ["Mo-Fr 09:00-19:00", "Sa 09:00-17:30"],
+    "priceRange": "€€"
+  }
+  </script>
+
+    <title>Élise & Ciseaux — Salon de Coiffure à Cogolin</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/home.css" />
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✂️</text></svg>" />
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════
+       HEADER
+  ════════════════════════════════════ -->
+    <header class="header header--hero" role="banner">
+        <div class="header__inner">
+
+            <a href="index.html" class="header__logo" aria-label="Élise & Ciseaux — Accueil">
+                <span class="header__logo-name">Élise &amp; Ciseaux</span>
+                <span class="header__logo-tagline">Coiffure · Cogolin</span>
+            </a>
+
+            <nav class="header__nav" aria-label="Navigation principale">
+                <a href="index.html">Accueil</a>
+                <a href="services.html">Prestations</a>
+                <a href="galerie.html">Galerie</a>
+                <a href="avis.html">Avis</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <a href="contact.html#rdv" class="btn btn--primary header__cta">Prendre rendez-vous</a>
+
+            <button class="header__burger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+        </div>
+    </header>
+
+    <nav class="mobile-nav" aria-label="Menu mobile">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Prestations</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="avis.html">Avis</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html#rdv" class="btn btn--primary" style="margin-top:1rem">Prendre rendez-vous</a>
+    </nav>
+
+
+    <!-- ════════════════════════════════════
+       HÉRO — pleine largeur
+  ════════════════════════════════════ -->
+    <section class="hero" aria-label="Présentation du salon">
+
+        <!-- ↓ PHOTO DE FOND HERO — recommandée : 1920×1080px minimum -->
+        <div class="hero__bg" aria-hidden="true">
+            <img src="images/hero-index-coiffure.webp" alt="Présentation salon coiffure" />
+        </div>
+
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <div class="hero__content">
+
+            <span class="hero__eyebrow">Salon de coiffure · Cogolin</span>
+
+            <h1 class="hero__title">
+                L'art du cheveu,<br />
+                <em>votre identité</em>
+            </h1>
+
+            <p class="hero__desc">
+                Coupe, couleur et soins sur-mesure au cœur du Golfe de Saint-Tropez.
+                Une équipe passionnée qui révèle le meilleur de vous depuis 2010.
+            </p>
+
+            <div class="hero__actions">
+                <a href="contact.html#rdv" class="btn btn--primary">Réserver ma séance</a>
+                <a href="services.html" class="btn btn--outline-light">Voir les prestations</a>
+            </div>
+
+            <div class="hero__stats">
+                <div>
+                    <span class="hero__stat-num">
+                        <span data-counter="15">0</span>
+                        <span class="hero__stat-suffix"> ans</span>
+                    </span>
+                    <span class="hero__stat-label">d'expérience</span>
+                </div>
+                <div>
+                    <span class="hero__stat-num">
+                        <span data-counter="300">0</span>
+                        <span class="hero__stat-suffix">+</span>
+                    </span>
+                    <span class="hero__stat-label">clients fidèles</span>
+                </div>
+                <div>
+                    <span class="hero__stat-num">
+                        <span data-counter="120">0</span>
+                        <span class="hero__stat-suffix">+</span>
+                    </span>
+                    <span class="hero__stat-label">avis 5 étoiles</span>
+                </div>
+                <div>
+                    <span class="hero__stat-num">
+                        <span data-counter="3">0</span>
+                    </span>
+                    <span class="hero__stat-label">experts coiffeurs</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       SERVICES
+  ════════════════════════════════════ -->
+    <section class="services section" id="services" aria-labelledby="services-title">
+        <div class="container">
+
+            <div class="services__head">
+                <span class="section-label">Ce que nous faisons</span>
+                <h2 class="section-title" id="services-title">
+                    Un savoir-faire <em>complet</em>
+                </h2>
+            </div>
+
+            <div class="services__grid">
+
+                <article class="service-card">
+                    <span class="service-card__icon">✂️</span>
+                    <h3 class="service-card__name">Coupe &amp; Coiffage</h3>
+                    <p class="service-card__desc">
+                        Coupe personnalisée femme, homme ou enfant. Shampoing, brushing
+                        et mise en forme inclus pour un résultat impeccable.
+                    </p>
+                    <a href="services.html#coupe" class="service-card__link">En savoir plus →</a>
+                </article>
+
+                <article class="service-card">
+                    <span class="service-card__icon">🎨</span>
+                    <h3 class="service-card__name">Coloration</h3>
+                    <p class="service-card__desc">
+                        Couleur pleine, balayage, mèches, tie &amp; dye.
+                        Produits végétaux disponibles sur demande.
+                    </p>
+                    <a href="services.html#coloration" class="service-card__link">En savoir plus →</a>
+                </article>
+
+                <article class="service-card">
+                    <span class="service-card__icon">🌿</span>
+                    <h3 class="service-card__name">Soins &amp; Traitements</h3>
+                    <p class="service-card__desc">
+                        Lissage brésilien, kératine, soins restructurants — des solutions
+                        adaptées à chaque type de cheveu.
+                    </p>
+                    <a href="services.html#soins" class="service-card__link">En savoir plus →</a>
+                </article>
+
+            </div>
+
+            <div class="services__cta">
+                <a href="services.html" class="btn btn--outline">Voir tous les tarifs</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       ZONE / À PROPOS
+  ════════════════════════════════════ -->
+    <section class="zone section" id="apropos" aria-labelledby="zone-title">
+        <div class="container">
+            <div class="zone__inner">
+
+                <!-- ↓ PHOTO INTÉRIEUR SALON — recommandée : 800×600px minimum -->
+                <div class="zone__photo">
+                    <img src="images/salon-coiffure.webp" alt="Intérieur du salon Élise & Ciseaux à Cogolin" />
+                </div>
+
+                <div class="zone__text">
+                    <span class="section-label">Notre salon</span>
+                    <h2 class="section-title" id="zone-title">
+                        Présents dans tout le <em>Golfe</em>
+                    </h2>
+
+                    <p>
+                        Basé à Cogolin, le salon Élise &amp; Ciseaux accueille une clientèle
+                        locale et de passage de tout le Golfe de Saint-Tropez.
+                        Pas de déplacement — juste un cadre bienveillant à deux pas de chez vous.
+                    </p>
+
+                    <ul class="zone__list">
+                        <li>Cogolin</li>
+                        <li>Saint-Tropez</li>
+                        <li>Grimaud</li>
+                        <li>Sainte-Maxime</li>
+                        <li>Ramatuelle</li>
+                        <li>La Croix-Valmer</li>
+                        <li>Gassin</li>
+                        <li>Le Plan-de-la-Tour</li>
+                    </ul>
+
+                    <a href="contact.html" class="btn btn--primary">Prendre rendez-vous</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       RÉALISATION RÉCENTE
+  ════════════════════════════════════ -->
+    <section class="realization section" id="galerie" aria-labelledby="real-title">
+        <div class="container">
+
+            <span class="realization__eyebrow">Réalisation récente</span>
+            <h2 class="realization__title" id="real-title">
+                Transformation <em>balayage naturel</em>
+            </h2>
+
+            <div class="realization__layout">
+
+                <!-- ↓ GRANDE PHOTO PRINCIPALE — recommandée : 800×900px minimum -->
+                <div class="realization__main">
+                    <img src="images/balayage-blond-naturel.webp" alt="Résultat final balayage blond naturel" />
+                </div>
+
+                <!-- ↓ PHOTO DÉTAIL — recommandée : 600×450px minimum -->
+                <div class="realization__sub">
+                    <img src="images/couleur-salon-coiffure.webp" alt="Détail de la couleur" />
+                </div>
+
+                <!-- Fiche technique -->
+                <div class="realization__info">
+                    <div class="realization__info-title">
+                        Mme Laure D.<br /><em>Saint-Tropez</em>
+                    </div>
+                    <dl class="realization__dl">
+                        <dt>Prestation</dt>
+                        <dd>Balayage blond naturel + coupe dégradée</dd>
+                        <dt>Coloriste</dt>
+                        <dd>Manon</dd>
+                        <dt>Durée</dt>
+                        <dd>3h30</dd>
+                        <dt>Produits</dt>
+                        <dd>Coloration végétale Wella</dd>
+                    </dl>
+                </div>
+
+                <!-- ↓ PHOTO COIFFURE FINALE — recommandée : 600×450px minimum -->
+                <div class="realization__sub">
+                    <img src="images/balayage-final.webp" alt="Coiffure terminée" />
+                </div>
+
+            </div>
+
+            <div style="margin-top:var(--sp-xl)">
+                <a href="galerie.html" class="btn btn--outline">Voir toutes les réalisations</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       AVIS CLIENTS
+  ════════════════════════════════════ -->
+    <section class="reviews section" id="avis" aria-labelledby="reviews-title">
+        <div class="container">
+
+            <div class="reviews__head">
+                <div>
+                    <span class="section-label">Témoignages</span>
+                    <h2 class="section-title" id="reviews-title">
+                        Ce que disent <em>nos clients</em>
+                    </h2>
+                </div>
+                <a href="avis.html" class="btn btn--outline">Tous les avis</a>
+            </div>
+
+            <div class="reviews__grid">
+
+                <article class="review-card">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        « Élise a su exactement ce qu'il me fallait dès la première minute.
+                        Résultat bluffant, ambiance chaleureuse. »
+                    </p>
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">S</div>
+                        <div>
+                            <div class="review-card__name">Sophie M.</div>
+                            <div class="review-card__location">Cogolin</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        « Mon balayage est exactement ce que j'avais en tête.
+                        Manon est une vraie artiste, je recommande à toutes mes amies. »
+                    </p>
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">L</div>
+                        <div>
+                            <div class="review-card__name">Laura D.</div>
+                            <div class="review-card__location">Saint-Tropez</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        « Thomas m'a réglé la barbe impeccablement.
+                        Ponctuel, professionnel, cadre sympa. Un sans-faute. »
+                    </p>
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">M</div>
+                        <div>
+                            <div class="review-card__name">Marc T.</div>
+                            <div class="review-card__location">Grimaud</div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       BANDEAU CTA
+  ════════════════════════════════════ -->
+    <section class="cta-strip" aria-label="Prise de rendez-vous">
+        <div class="container">
+            <div class="cta-strip__inner">
+                <div>
+                    <h2 class="cta-strip__title">
+                        Un projet ? Une envie ? <em>Parlons-en.</em>
+                    </h2>
+                    <p class="cta-strip__sub">Rendez-vous en ligne · Réponse sous 24h</p>
+                </div>
+                <div class="cta-strip__actions">
+                    <a href="contact.html#rdv" class="btn btn--primary">Prendre rendez-vous</a>
+                    <a href="tel:+33494561234" class="btn btn--outline-light">04 94 56 12 34</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+
+            <div class="footer__grid">
+
+                <div>
+                    <div class="footer__brand-name">Élise &amp; Ciseaux</div>
+                    <p class="footer__brand-desc">
+                        Salon de coiffure au cœur de Cogolin depuis 2010.
+                        Une équipe passionnée pour des résultats qui vous ressemblent.
+                    </p>
+                </div>
+
+                <div class="footer__col">
+                    <h3 class="footer__col-title">Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="services.html">Prestations</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="avis.html">Avis clients</a></li>
+                        <li><a href="contact.html">Contact &amp; RDV</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h3 class="footer__col-title">Contact</h3>
+                    <address>
+                        12 rue du Marché<br />
+                        83310 Cogolin<br />
+                        <a href="tel:+33494561234">04 94 56 12 34</a><br />
+                        <a href="mailto:bonjour@elise-et-ciseaux.fr">bonjour@elise-et-ciseaux.fr</a>
+                    </address>
+                    <p style="margin-top:.75rem;font-size:var(--fs-xs);line-height:2;color:rgba(245,237,227,0.4)">
+                        Lun–Ven : 9h–19h<br />
+                        Sam : 9h–17h30 · Dim : fermé
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="footer__bottom">
+                <span>© 2024 Élise &amp; Ciseaux — Tous droits réservés</span>
+                <span>
+                    <a href="mentions-legales.html" style="color:rgba(245,237,227,0.35);transition:color 200ms"
+                        onmouseover="this.style.color='var(--clr-terra-light)'"
+                        onmouseout="this.style.color='rgba(245,237,227,0.35)'">Mentions légales</a>
+                    &nbsp;·&nbsp;
+                    <a href="politique-confidentialite.html" style="color:rgba(245,237,227,0.35);transition:color 200ms"
+                        onmouseover="this.style.color='var(--clr-terra-light)'"
+                        onmouseout="this.style.color='rgba(245,237,227,0.35)'">Politique de confidentialité</a>
+                    &nbsp;·&nbsp;
+                    Réalisé par <a href="#" style="color:var(--clr-terra-light)">Sud Web Project</a>
+                </span>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Galerie de réalisations du salon Élise & Ciseaux à Cogolin — coupes, colorations, balayages, soins capillaires." />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Galerie — Élise & Ciseaux, Cogolin" />
+    <meta property="og:description"
+        content="Découvrez nos réalisations : coupes, colorations, balayages et soins capillaires." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <title>Galerie — Élise & Ciseaux · Salon de Coiffure Cogolin</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/galerie.css" />
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✂️</text></svg>" />
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════
+       HEADER
+  ════════════════════════════════════ -->
+    <header class="header" role="banner">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo" aria-label="Élise & Ciseaux — Accueil">
+                <span class="header__logo-name">Élise &amp; Ciseaux</span>
+                <span class="header__logo-tagline">Coiffure · Cogolin</span>
+            </a>
+            <nav class="header__nav" aria-label="Navigation principale">
+                <a href="index.html">Accueil</a>
+                <a href="services.html">Prestations</a>
+                <a href="galerie.html" class="active">Galerie</a>
+                <a href="avis.html">Avis</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="contact.html#rdv" class="btn btn--primary header__cta">Prendre rendez-vous</a>
+            <button class="header__burger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" aria-label="Menu mobile">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Prestations</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="avis.html">Avis</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html#rdv" class="btn btn--primary" style="margin-top:1rem">Prendre rendez-vous</a>
+    </nav>
+
+
+    <!-- ════════════════════════════════════
+       BANDEAU PAGE
+  ════════════════════════════════════ -->
+    <section class="page-hero" aria-label="Titre de la page">
+        <div class="container">
+            <div class="page-hero__inner">
+                <div>
+                    <span class="section-label">Nos réalisations</span>
+                    <h1 class="page-hero__title">
+                        La galerie<br />
+                        <em>du salon</em>
+                    </h1>
+                    <p class="page-hero__sub">
+                        Coupes, colorations, balayages, soins — chaque photo raconte
+                        une transformation unique. Cliquez sur une image pour l'agrandir.
+                    </p>
+                </div>
+                <div>
+                    <a href="contact.html#rdv" class="btn btn--primary">Réserver ma séance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       FILTRES (sticky)
+  ════════════════════════════════════ -->
+    <div class="gallery-filters" role="navigation" aria-label="Filtrer par catégorie">
+        <div class="container">
+            <div class="gallery-filters__inner">
+                <button class="filter-btn active" data-filter="tout">Tout voir</button>
+                <button class="filter-btn" data-filter="coupe">✂️ Coupe</button>
+                <button class="filter-btn" data-filter="coloration">🎨 Coloration</button>
+                <button class="filter-btn" data-filter="balayage">✨ Balayage</button>
+                <button class="filter-btn" data-filter="soin">🌿 Soin</button>
+                <button class="filter-btn" data-filter="coiffage">💫 Coiffage</button>
+                <span class="gallery-filters__count">18 réalisations</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════
+       GRILLE GALERIE
+  ════════════════════════════════════ -->
+    <section class="gallery-section" aria-label="Galerie de réalisations">
+        <div class="container">
+            <div class="gallery-grid" role="list">
+
+                <!-- ── CARRÉ PLONGEANT ── -->
+                <div class="gallery-item" data-cat="coupe" data-caption="Carré plongeant — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Carré plongeant">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/carre-plongeant.webp" alt="Carré plongeant" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Carré plongeant — Élise</span>
+                        <span class="gallery-item__tag">Coupe</span>
+                    </div>
+                </div>
+
+                <!-- ── BALAYAGE DORÉ ── -->
+                <div class="gallery-item" data-cat="balayage" data-caption="Balayage doré — Manon" role="listitem"
+                    tabindex="0" aria-label="Voir : Balayage doré">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/baleyage.webp" alt="Balayage doré" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Balayage doré — Manon</span>
+                        <span class="gallery-item__tag">Balayage</span>
+                    </div>
+                </div>
+
+                <!-- ── COULEUR CHOCOLAT ── -->
+                <div class="gallery-item" data-cat="coloration" data-caption="Couleur chocolat — Manon" role="listitem"
+                    tabindex="0" aria-label="Voir : Couleur chocolat">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/coloration-chocolat.webp" alt="Couleur chocolat" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Couleur chocolat — Manon</span>
+                        <span class="gallery-item__tag">Coloration</span>
+                    </div>
+                </div>
+
+                <!-- ── CHIGNON MARIÉE ── -->
+                <div class="gallery-item" data-cat="coiffage" data-caption="Chignon mariée — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Chignon mariée">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/chignon-marie.webp" alt="Chignon mariée" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Chignon mariée — Élise</span>
+                        <span class="gallery-item__tag">Coiffage</span>
+                    </div>
+                </div>
+
+                <!-- ── DÉGRADÉ COURT ── -->
+                <div class="gallery-item" data-cat="coupe" data-caption="Dégradé court — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Dégradé court">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/degrade-court.webp" alt="Dégradé court" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Dégradé court — Élise</span>
+                        <span class="gallery-item__tag">Coupe</span>
+                    </div>
+                </div>
+
+                <!-- ── BALAYAGE CALIFORNIEN ── -->
+                <div class="gallery-item" data-cat="balayage" data-caption="Balayage californien — Manon"
+                    role="listitem" tabindex="0" aria-label="Voir : Balayage californien">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/balayage-californien.webp" alt="Balayage californien" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Balayage californien — Manon</span>
+                        <span class="gallery-item__tag">Balayage</span>
+                    </div>
+                </div>
+
+                <!-- ── LISSAGE BRÉSILIEN ── -->
+                <div class="gallery-item" data-cat="soin" data-caption="Lissage brésilien — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Lissage brésilien">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/lissage-bresilien.webp" alt="Lissage brésilien" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Lissage brésilien — Élise</span>
+                        <span class="gallery-item__tag">Soin</span>
+                    </div>
+                </div>
+
+                <!-- ── TIE &AMP; DYE CUIVRÉ ── -->
+                <div class="gallery-item" data-cat="coloration" data-caption="Tie &amp; Dye cuivré — Manon"
+                    role="listitem" tabindex="0" aria-label="Voir : Tie &amp; Dye cuivré">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/ty-and-die.webp" alt="Tie &amp; Dye cuivré" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Tie &amp; Dye cuivré — Manon</span>
+                        <span class="gallery-item__tag">Coloration</span>
+                    </div>
+                </div>
+
+                <!-- ── BOB TEXTURÉ ── -->
+                <div class="gallery-item" data-cat="coupe" data-caption="Bob texturé — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Bob texturé">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/bob-texture.webp" alt="Bob texturé" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Bob texturé — Élise</span>
+                        <span class="gallery-item__tag">Coupe</span>
+                    </div>
+                </div>
+
+                <!-- ── BALAYAGE CENDRÉ ── -->
+                <div class="gallery-item" data-cat="balayage" data-caption="Balayage cendré — Manon" role="listitem"
+                    tabindex="0" aria-label="Voir : Balayage cendré">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/balayage-cendré.webp" alt="Balayage cendré" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Balayage cendré — Manon</span>
+                        <span class="gallery-item__tag">Balayage</span>
+                    </div>
+                </div>
+
+                <!-- ── TRESSES BOHÈMES ── -->
+                <div class="gallery-item" data-cat="coiffage" data-caption="Tresses bohèmes — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Tresses bohèmes">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/tresses-bohemes.webp" alt="Tresses bohèmes" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Tresses bohèmes — Élise</span>
+                        <span class="gallery-item__tag">Coiffage</span>
+                    </div>
+                </div>
+
+                <!-- ── ROUGE PROFOND ── -->
+                <div class="gallery-item" data-cat="coloration" data-caption="Couleur rouge profond — Manon"
+                    role="listitem" tabindex="0" aria-label="Voir : Rouge profond">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/couleur-rouge-profond.webp" alt="Rouge profond" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Couleur rouge profond — Manon</span>
+                        <span class="gallery-item__tag">Coloration</span>
+                    </div>
+                </div>
+
+                <!-- ── COUPE LONGUE EFFILÉE ── -->
+                <div class="gallery-item" data-cat="coupe" data-caption="Coupe longue effilée — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Coupe longue effilée">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/coupe-longue-effilee.webp" alt="Coupe longue effilée" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Coupe longue effilée — Élise</span>
+                        <span class="gallery-item__tag">Coupe</span>
+                    </div>
+                </div>
+
+                <!-- ── SOIN OLAPLEX ── -->
+                <div class="gallery-item" data-cat="soin" data-caption="Soin Olaplex — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Soin Olaplex">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/soin-olaplex.webp" alt="Soin Olaplex" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Soin Olaplex — Élise</span>
+                        <span class="gallery-item__tag">Soin</span>
+                    </div>
+                </div>
+
+                <!-- ── MÈCHES BLONDES ── -->
+                <div class="gallery-item" data-cat="balayage" data-caption="Mèches blondes — Manon" role="listitem"
+                    tabindex="0" aria-label="Voir : Mèches blondes">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/meches-blondes.webp" alt="Mèches blondes" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Mèches blondes — Manon</span>
+                        <span class="gallery-item__tag">Balayage</span>
+                    </div>
+                </div>
+
+                <!-- ── ONDULATIONS GLAMOUR ── -->
+                <div class="gallery-item" data-cat="coiffage" data-caption="Ondulations glamour — Élise" role="listitem"
+                    tabindex="0" aria-label="Voir : Ondulations glamour">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/ondulation-glamour.webp" alt="Ondulations glamour" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Ondulations glamour — Élise</span>
+                        <span class="gallery-item__tag">Coiffage</span>
+                    </div>
+                </div>
+
+                <!-- ── CHÂTAIN NATUREL ── -->
+                <div class="gallery-item" data-cat="coloration" data-caption="Châtain naturel — Manon" role="listitem"
+                    tabindex="0" aria-label="Voir : Châtain naturel">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/chatain-naturel.webp" alt="Châtain naturel" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Châtain naturel — Manon</span>
+                        <span class="gallery-item__tag">Coloration</span>
+                    </div>
+                </div>
+
+                <!-- ── PIXIE CUT ── -->
+                <div class="gallery-item" data-cat="coupe" data-caption="Pixie cut — Élise" role="listitem" tabindex="0"
+                    aria-label="Voir : Pixie cut">
+                    <div class="gallery-item__img-wrap">
+                        <img src="images/pixie-cut.webp" alt="Pixie cut" loading="lazy" />
+                        <div class="gallery-item__overlay">
+                            <span class="gallery-item__overlay-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item__footer">
+                        <span class="gallery-item__caption">Pixie cut — Élise</span>
+                        <span class="gallery-item__tag">Coupe</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       BANDEAU CTA
+  ════════════════════════════════════ -->
+    <section class="cta-strip" aria-label="Prise de rendez-vous">
+        <div class="container">
+            <div class="cta-strip__inner">
+                <div>
+                    <h2 class="cta-strip__title">
+                        Votre prochaine <em>transformation ?</em>
+                    </h2>
+                    <p class="cta-strip__sub">Réservez en ligne · Réponse sous 24h</p>
+                </div>
+                <div class="cta-strip__actions">
+                    <a href="contact.html#rdv" class="btn btn--white">Prendre rendez-vous</a>
+                    <a href="tel:+33494561234" class="btn btn--outline-white">04 94 56 12 34</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__brand-name">Élise &amp; Ciseaux</div>
+                    <p class="footer__brand-desc">
+                        Salon de coiffure au cœur de Cogolin depuis 2010.
+                        Une équipe passionnée pour des résultats qui vous ressemblent.
+                    </p>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__col-title">Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="services.html">Prestations</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="avis.html">Avis clients</a></li>
+                        <li><a href="contact.html">Contact &amp; RDV</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__col-title">Contact</h3>
+                    <address>
+                        12 rue du Marché<br />
+                        83310 Cogolin<br />
+                        <a href="tel:+33494561234">04 94 56 12 34</a><br />
+                        <a href="mailto:bonjour@elise-et-ciseaux.fr">bonjour@elise-et-ciseaux.fr</a>
+                    </address>
+                    <p style="margin-top:.75rem;font-size:var(--fs-xs);line-height:2;color:rgba(255,255,255,0.5)">
+                        Lun–Ven : 9h–19h<br />
+                        Sam : 9h–17h30 · Dim : fermé
+                    </p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <span>© 2024 Élise &amp; Ciseaux — Tous droits réservés</span>
+                <span>
+                    <a href="mentions-legales.html" style="color:rgba(255,255,255,0.45);transition:color 200ms"
+                        onmouseover="this.style.color='var(--clr-terra-light)'"
+                        onmouseout="this.style.color='rgba(255,255,255,0.45)'">Mentions légales</a>
+                    &nbsp;·&nbsp;
+                    <a href="politique-confidentialite.html" style="color:rgba(255,255,255,0.45);transition:color 200ms"
+                        onmouseover="this.style.color='var(--clr-terra-light)'"
+                        onmouseout="this.style.color='rgba(255,255,255,0.45)'">Politique de confidentialité</a>
+                    &nbsp;·&nbsp;
+                    Réalisé par <a href="#" style="color:var(--clr-terra-light)">Sud Web Project</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ════════════════════════════════════
+       LIGHTBOX
+  ════════════════════════════════════ -->
+    <div class="lightbox" role="dialog" aria-modal="true" aria-label="Galerie agrandie">
+        <button class="lightbox__close" aria-label="Fermer">✕</button>
+        <span class="lightbox__counter" aria-live="polite"></span>
+
+        <div class="lightbox__img-wrap">
+            <!-- Contenu injecté par JS -->
+        </div>
+
+        <button class="lightbox__btn lightbox__prev" aria-label="Image précédente">←</button>
+        <button class="lightbox__btn lightbox__next" aria-label="Image suivante">→</button>
+    </div>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/galerie.js"></script>
+
+</body>
+
+</html>

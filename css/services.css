@@ -1,0 +1,478 @@
+/* ============================================================
+   ÉLISE & CISEAUX — services.css
+   Page Prestations & Tarifs
+   ============================================================ */
+
+/* ── PAGE HERO (bandeau simple, pas de photo pleine largeur) ── */
+.page-hero {
+    padding-top: calc(var(--header-h) + var(--sp-2xl));
+    padding-bottom: var(--sp-2xl);
+    background: var(--clr-sand);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Motif décoratif léger en fond */
+.page-hero::after {
+    content: '✂';
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22rem;
+    color: rgba(196, 113, 74, 0.06);
+    pointer-events: none;
+    line-height: 1;
+}
+
+.page-hero__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sp-lg);
+}
+
+.page-hero__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--clr-dark);
+    line-height: 1.05;
+}
+
+.page-hero__title em {
+    display: block;
+    font-style: italic;
+    color: var(--clr-terra);
+}
+
+.page-hero__sub {
+    font-size: var(--fs-md);
+    color: var(--clr-mid);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-top: var(--sp-md);
+}
+
+.page-hero__cta {
+    flex-shrink: 0;
+}
+
+/* ── NAV ANCRES (sticky sous le header) ────────────────────── */
+.services-nav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 100;
+    background: var(--clr-white);
+    border-bottom: 1px solid var(--clr-sand-mid);
+}
+
+.services-nav__inner {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--sp-lg);
+}
+
+.services-nav__inner::-webkit-scrollbar {
+    display: none;
+}
+
+.services-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--sp-md) var(--sp-lg);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--clr-mid);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 200ms, border-color 200ms;
+    flex-shrink: 0;
+}
+
+.services-nav__link:hover {
+    color: var(--clr-dark);
+    border-bottom-color: var(--clr-terra-light);
+}
+
+.services-nav__link.active {
+    color: var(--clr-terra);
+    border-bottom-color: var(--clr-terra);
+}
+
+/* ── SECTION PRESTATION ─────────────────────────────────────── */
+.prestation {
+    padding: var(--sp-2xl) 0;
+    border-bottom: 1px solid var(--clr-sand-mid);
+}
+
+.prestation:last-of-type {
+    border-bottom: none;
+}
+
+.prestation--alt {
+    background: var(--clr-sand);
+}
+
+.prestation__head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-lg);
+    margin-bottom: var(--sp-xl);
+}
+
+.prestation__icon {
+    width: 64px;
+    height: 64px;
+    background: var(--clr-terra);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.prestation__head-text {
+    flex: 1;
+}
+
+.prestation__name {
+    font-size: var(--fs-2xl);
+    color: var(--clr-dark);
+    margin-bottom: var(--sp-xs);
+}
+
+.prestation__tagline {
+    font-size: var(--fs-md);
+    color: var(--clr-mid);
+    line-height: 1.6;
+}
+
+/* Grille de tarifs */
+.prestation__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-md);
+}
+
+.tarif-card {
+    background: var(--clr-white);
+    border: 1px solid var(--clr-sand-mid);
+    border-radius: var(--radius-md);
+    padding: var(--sp-lg);
+    position: relative;
+    transition: border-color 250ms, box-shadow 250ms, transform 250ms var(--ease-out);
+}
+
+.tarif-card:hover {
+    border-color: var(--clr-terra-light);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-3px);
+}
+
+/* Badge "Populaire" */
+.tarif-card--popular {
+    border-color: var(--clr-terra);
+}
+
+.tarif-card--popular::before {
+    content: 'Populaire';
+    position: absolute;
+    top: -1px;
+    right: var(--sp-md);
+    background: var(--clr-terra);
+    color: #fff;
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.tarif-card__name {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    color: var(--clr-dark);
+    margin-bottom: var(--sp-xs);
+}
+
+.tarif-card__desc {
+    font-size: var(--fs-sm);
+    color: var(--clr-mid);
+    line-height: 1.6;
+    margin-bottom: var(--sp-md);
+    min-height: 3em;
+}
+
+.tarif-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: var(--sp-sm);
+}
+
+.tarif-card__amount {
+    font-family: var(--ff-display);
+    font-size: var(--fs-3xl);
+    color: var(--clr-terra);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.tarif-card__unit {
+    font-size: var(--fs-sm);
+    color: var(--clr-mid);
+}
+
+.tarif-card__duration {
+    font-size: var(--fs-xs);
+    color: var(--clr-mid);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tarif-card__duration::before {
+    content: '⏱';
+    font-size: 0.8em;
+}
+
+/* Séparateur visuel dans la section */
+.prestation__note {
+    margin-top: var(--sp-lg);
+    padding: var(--sp-md) var(--sp-lg);
+    background: var(--clr-sand);
+    border-left: 3px solid var(--clr-terra);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: var(--fs-sm);
+    color: var(--clr-mid);
+    line-height: 1.65;
+}
+
+.prestation--alt .prestation__note {
+    background: var(--clr-white);
+}
+
+/* ── SECTION ÉQUIPE ─────────────────────────────────────────── */
+.team {
+    background: var(--clr-dark);
+    padding: var(--sp-2xl) 0;
+}
+
+.team__head {
+    text-align: center;
+    margin-bottom: var(--sp-xl);
+}
+
+.team__head .section-label {
+    color: var(--clr-terra-light);
+}
+
+.team__head .section-title {
+    color: #fff;
+}
+
+.team__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-md);
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: background 250ms, border-color 250ms;
+}
+
+.team-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(196, 113, 74, 0.4);
+}
+
+.team-card__photo {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.team-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms var(--ease-out);
+}
+
+.team-card:hover .team-card__photo img {
+    transform: scale(1.04);
+}
+
+/* Placeholder photo équipe */
+.team-card__photo-ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-display);
+    font-style: italic;
+    font-size: var(--fs-lg);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.team-card__photo-ph--1 {
+    background: linear-gradient(135deg, var(--clr-terra), #8a4a2a);
+}
+
+.team-card__photo-ph--2 {
+    background: linear-gradient(135deg, var(--clr-sage), #4a6e4d);
+}
+
+.team-card__photo-ph--3 {
+    background: linear-gradient(135deg, #7a6a5a, #4a3a2a);
+}
+
+.team-card__body {
+    padding: var(--sp-md) var(--sp-lg);
+}
+
+.team-card__name {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.team-card__role {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--clr-terra-light);
+    margin-bottom: var(--sp-sm);
+}
+
+.team-card__bio {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.65;
+}
+
+/* ── BANDEAU CTA ────────────────────────────────────────────── */
+.cta-strip {
+    background: var(--clr-terra);
+    padding: var(--sp-xl) 0;
+}
+
+.cta-strip__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-lg);
+}
+
+.cta-strip__title {
+    font-size: var(--fs-2xl);
+    color: var(--clr-white);
+}
+
+.cta-strip__title em {
+    font-style: italic;
+}
+
+.cta-strip__sub {
+    font-size: var(--fs-sm);
+    color: rgba(253, 250, 247, 0.75);
+    margin-top: var(--sp-xs);
+}
+
+.cta-strip__actions {
+    display: flex;
+    gap: var(--sp-md);
+    flex-shrink: 0;
+}
+
+.btn--white {
+    background: var(--clr-white);
+    color: var(--clr-terra);
+}
+
+.btn--white:hover {
+    background: var(--clr-sand);
+    transform: translateY(-2px);
+}
+
+.btn--outline-white {
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    color: var(--clr-white);
+}
+
+.btn--outline-white:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: white;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .prestation__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team__grid .team-card:last-child {
+        grid-column: span 2;
+        max-width: 400px;
+        justify-self: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero__inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-hero::after {
+        display: none;
+    }
+
+    .prestation__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team__grid .team-card:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+
+    .cta-strip__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cta-strip__actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .services-nav__link {
+        padding: var(--sp-sm) var(--sp-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .prestation__head {
+        flex-direction: column;
+    }
+}

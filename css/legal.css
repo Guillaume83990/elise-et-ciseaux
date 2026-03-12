@@ -1,0 +1,113 @@
+/* ============================================================
+   ÉLISE & CISEAUX — legal.css
+   Pages Mentions légales & Politique de confidentialité
+   ============================================================ */
+
+.legal {
+    padding-top: calc(var(--header-h) + var(--sp-xl));
+    padding-bottom: var(--sp-3xl);
+    min-height: 80vh;
+}
+
+.legal__hero {
+    margin-bottom: var(--sp-2xl);
+    padding-bottom: var(--sp-xl);
+    border-bottom: 1px solid var(--clr-sand-mid);
+}
+
+.legal__title {
+    font-size: var(--fs-3xl);
+    color: var(--clr-dark);
+    margin-bottom: var(--sp-sm);
+}
+
+.legal__intro {
+    font-size: var(--fs-md);
+    color: var(--clr-mid);
+    max-width: 640px;
+    line-height: 1.7;
+}
+
+/* Contenu */
+.legal__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xl);
+}
+
+.legal__section h2 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: var(--clr-dark);
+    margin-bottom: var(--sp-md);
+    padding-bottom: var(--sp-xs);
+    border-bottom: 1.5px solid var(--clr-terra-light);
+    display: inline-block;
+}
+
+.legal__section p {
+    margin-bottom: var(--sp-sm);
+}
+
+.legal__section p:last-child {
+    margin-bottom: 0;
+}
+
+.legal__section a {
+    color: var(--clr-terra);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 200ms;
+}
+
+.legal__section a:hover {
+    color: var(--clr-terra-dark);
+}
+
+.legal__list {
+    list-style: none;
+    margin: var(--sp-sm) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+}
+
+.legal__list li {
+    font-size: var(--fs-base);
+    color: var(--clr-mid);
+    line-height: 1.65;
+    padding-left: var(--sp-md);
+    position: relative;
+}
+
+.legal__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--clr-terra);
+}
+
+.legal__back {
+    padding-top: var(--sp-xl);
+    border-top: 1px solid var(--clr-sand-mid);
+    margin-top: var(--sp-sm);
+}
+
+/* Container étroit déjà défini dans style.css */
+.container--narrow {
+    max-width: 760px;
+}
+
+@media (max-width: 768px) {
+    .legal {
+        padding-top: calc(var(--header-h) + var(--sp-lg));
+    }
+
+    .legal__title {
+        font-size: var(--fs-2xl);
+    }
+}
