@@ -1,6 +1,6 @@
 /* ============================================================
-   ÉLISE & CISEAUX — avis.js
-   Filtres, tri, animation barres de notation
+   ÉLISE & CISEAUX — avis.js — VERSION CORRIGÉE (v4)
+   Filtres (pastilles desktop + select mobile), tri, barres
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,9 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ────────────────────────────────────────────────────────────
-       FILTRES PAR PRESTATION
+       FILTRES PAR PRESTATION — pastilles (desktop) + select (mobile)
+       Les deux interfaces restent synchronisées entre elles via
+       une seule fonction applyFilter, quel que soit l'écran utilisé.
     ──────────────────────────────────────────────────────────── */
     const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+    const mobileFilterSelect = document.querySelector('#reviews-filter-mobile');
     const cards = document.querySelectorAll('.review-card[data-cat]');
     const countEl = document.querySelector('.reviews-count');
 
@@ -37,24 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (countEl) countEl.textContent = `${n} avis`;
     };
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            cards.forEach(card => {
-                const cat = card.getAttribute('data-cat');
-                if (filter === 'tout' || cat === filter) {
-                    card.classList.remove('is-hidden');
-                } else {
-                    card.classList.add('is-hidden');
-                }
-            });
-
-            updateCount();
+    const applyFilter = (filter) => {
+        filterBtns.forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-filter') === filter);
         });
+        if (mobileFilterSelect) mobileFilterSelect.value = filter;
+
+        cards.forEach(card => {
+            const cat = card.getAttribute('data-cat');
+            card.classList.toggle('is-hidden', !(filter === 'tout' || cat === filter));
+        });
+
+        updateCount();
+    };
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.getAttribute('data-filter')));
+    });
+
+    mobileFilterSelect?.addEventListener('change', () => {
+        applyFilter(mobileFilterSelect.value);
     });
 
     updateCount();

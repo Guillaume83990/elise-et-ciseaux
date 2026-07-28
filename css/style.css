@@ -1,14 +1,7 @@
 /* ============================================================
-   ÉLISE & CISEAUX — style.css (Global)
+   ÉLISE & CISEAUX — style.css (Global) — VERSION CORRIGÉE
    Site Vitrine Essentiel — Sud Web Project
    ============================================================ */
-
-/* ── @font-face ──────────────────────────────────────────────
-   Placer les .woff2 dans fonts/ (racine du projet)
-   Sources :
-   https://fonts.google.com/specimen/Cormorant+Garamond
-   https://fonts.google.com/specimen/DM+Sans
-   ─────────────────────────────────────────────────────────── */
 
 @font-face {
     font-family: 'Cormorant Garamond';
@@ -66,21 +59,26 @@
     --ff-display: 'Cormorant Garamond', 'Georgia', serif;
     --ff-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
 
+    /* ── Typo fluide (clamp) : plus de retours à la ligne disgracieux
+       ni de titres surdimensionnés sur mobile ───────────────── */
     --fs-xs: 0.75rem;
     --fs-sm: 0.875rem;
     --fs-base: 1rem;
-    --fs-md: 1.125rem;
-    --fs-lg: 1.375rem;
-    --fs-xl: 1.75rem;
-    --fs-2xl: 2.25rem;
-    --fs-3xl: 3rem;
+    --fs-md: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+    --fs-lg: clamp(1.125rem, 1.03rem + 0.45vw, 1.375rem);
+    --fs-xl: clamp(1.35rem, 1.18rem + 0.8vw, 1.75rem);
+    --fs-2xl: clamp(1.6rem, 1.28rem + 1.5vw, 2.25rem);
+    --fs-3xl: clamp(2rem, 1.4rem + 2.8vw, 3rem);
 
     --sp-xs: 0.5rem;
     --sp-sm: 1rem;
     --sp-md: 1.5rem;
     --sp-lg: 2.5rem;
     --sp-xl: 4rem;
-    --sp-2xl: 6rem;
+    --sp-2xl: clamp(3rem, 2.2rem + 3.5vw, 6rem);
+
+    /* Padding conteneur 100% fluide — supprime le "saut" à 768px */
+    --container-pad: clamp(1rem, 3vw + 0.5rem, 2.5rem);
 
     --radius-sm: 4px;
     --radius-md: 12px;
@@ -90,6 +88,9 @@
     --header-h: 68px;
 
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* Zone tactile minimale accessible */
+    --tap-min: 44px;
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -114,6 +115,7 @@ body {
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
 }
 
 img {
@@ -125,6 +127,7 @@ img {
 a {
     color: inherit;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ul {
@@ -136,6 +139,7 @@ button {
     cursor: pointer;
     border: none;
     background: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* ── Typographie ───────────────────────────────────────────── */
@@ -146,12 +150,15 @@ h4 {
     font-family: var(--ff-display);
     font-weight: 400;
     line-height: 1.15;
+    text-wrap: balance;
+    /* évite les veuves/orphelines sur les titres */
 }
 
 p {
     font-size: var(--fs-base);
     color: var(--clr-mid);
     line-height: 1.7;
+    text-wrap: pretty;
 }
 
 /* ── Utilitaires ───────────────────────────────────────────── */
@@ -159,11 +166,16 @@ p {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 var(--sp-lg);
+    padding: 0 var(--container-pad);
 }
 
 .section {
     padding: var(--sp-2xl) 0;
+}
+
+/* Ancres : compense le header fixe pour tout lien direct (#services, #avis…) */
+section[id] {
+    scroll-margin-top: calc(var(--header-h) + 12px);
 }
 
 .section-label {
@@ -191,12 +203,15 @@ p {
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--sp-xs);
     font-family: var(--ff-body);
     font-size: var(--fs-sm);
     font-weight: 500;
     letter-spacing: 0.05em;
     padding: 0.85em 2em;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px */
     border-radius: var(--radius-pill);
     transition: background 220ms var(--ease-out),
         color 220ms var(--ease-out),
@@ -236,6 +251,16 @@ p {
     transform: translateY(-2px);
 }
 
+.btn--outline-light {
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    color: var(--clr-white);
+}
+
+.btn--outline-light:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
 /* ── Animation simple au chargement ───────────────────────── */
 @keyframes fadeUp {
     from {
@@ -265,6 +290,18 @@ p {
     animation: fadeUp 0.6s var(--ease-out) 0.55s both;
 }
 
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* ── HEADER ────────────────────────────────────────────────── */
 .header {
     position: fixed;
@@ -273,7 +310,6 @@ p {
     right: 0;
     height: var(--header-h);
     z-index: 900;
-    /* Par défaut : fond blanc (toutes les pages sauf accueil) */
     background: rgba(253, 250, 247, 0.97);
     backdrop-filter: blur(10px);
     box-shadow: 0 1px 0 var(--clr-sand-mid);
@@ -281,15 +317,12 @@ p {
         box-shadow 350ms var(--ease-out);
 }
 
-/* Mode hero : transparent au-dessus d'une photo pleine largeur */
-/* Ajouter class="header header--hero" sur la page d'accueil */
 .header--hero {
     background: transparent;
     box-shadow: none;
     backdrop-filter: none;
 }
 
-/* Dès qu'on scroll sur la page hero → fond blanc */
 .header--hero.is-scrolled {
     background: rgba(253, 250, 247, 0.97);
     backdrop-filter: blur(10px);
@@ -301,12 +334,18 @@ p {
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 var(--sp-lg);
+    padding: 0 var(--container-pad);
     max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Logo couleurs par défaut (fond blanc) */
+.header__logo {
+    min-height: var(--tap-min);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .header__logo-name {
     font-family: var(--ff-display);
     font-size: 1.5rem;
@@ -328,7 +367,6 @@ p {
     transition: color 300ms;
 }
 
-/* Logo blanc sur hero transparent */
 .header--hero:not(.is-scrolled) .header__logo-name {
     color: #fff;
 }
@@ -350,12 +388,14 @@ p {
     letter-spacing: 0.03em;
     transition: color 200ms;
     position: relative;
+    padding: 0.5rem 0;
+    /* confort de survol/clic */
 }
 
 .header__nav a::after {
     content: '';
     position: absolute;
-    bottom: -3px;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 1.5px;
@@ -373,7 +413,6 @@ p {
     width: 100%;
 }
 
-/* Nav blanc sur hero transparent */
 .header--hero:not(.is-scrolled) .header__nav a {
     color: rgba(255, 255, 255, 0.88);
 }
@@ -386,17 +425,21 @@ p {
     color: #fff;
 }
 
-/* Burger */
+/* Burger — zone tactile 44×44px réelle, traits visuels inchangés (26px) */
 .header__burger {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 5px;
-    width: 26px;
-    padding: 4px 0;
+    width: var(--tap-min);
+    height: var(--tap-min);
+    flex-shrink: 0;
 }
 
 .header__burger span {
     display: block;
+    width: 26px;
     height: 1.5px;
     background: var(--clr-dark);
     border-radius: 2px;
@@ -404,12 +447,10 @@ p {
     transform-origin: center;
 }
 
-/* Burger blanc sur hero transparent */
 .header--hero:not(.is-scrolled) .header__burger span {
     background: #fff;
 }
 
-/* Mobile nav */
 .mobile-nav {
     display: none;
     position: fixed;
@@ -432,9 +473,11 @@ p {
 
 .mobile-nav a {
     font-family: var(--ff-display);
-    font-size: 1.6rem;
+    font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.6rem);
     color: var(--clr-dark);
     transition: color 200ms;
+    padding: 0.4rem 1rem;
+    /* confort tactile */
 }
 
 .mobile-nav a:hover {
@@ -451,7 +494,6 @@ p {
 .footer {
     background: var(--clr-dark);
     color: rgba(255, 255, 255, 0.75);
-    /* texte courant : blanc à 75% */
     padding: var(--sp-xl) 0 var(--sp-lg);
 }
 
@@ -495,6 +537,9 @@ p {
     font-size: var(--fs-sm);
     color: rgba(255, 255, 255, 0.75);
     transition: color 200ms;
+    display: inline-block;
+    padding: 0.3rem 0;
+    /* confort tactile mobile */
 }
 
 .footer__col a:hover {
@@ -510,6 +555,8 @@ p {
 
 .footer__col address a {
     color: rgba(255, 255, 255, 0.75);
+    display: inline-block;
+    padding: 0.15rem 0;
 }
 
 .footer__col address a:hover {
@@ -522,11 +569,23 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
     font-size: var(--fs-xs);
     color: rgba(255, 255, 255, 0.45);
 }
 
 /* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .footer__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer__grid>div:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
 @media (max-width: 768px) {
 
     .header__nav,
@@ -541,20 +600,21 @@ p {
     .mobile-nav {
         display: flex;
     }
+}
 
+@media (max-width: 600px) {
     .footer__grid {
         grid-template-columns: 1fr;
         gap: var(--sp-lg);
     }
 
-    .footer__bottom {
-        flex-direction: column;
-        gap: var(--sp-xs);
-        text-align: center;
+    .footer__grid>div:first-child {
+        grid-column: auto;
     }
 
-    .container {
-        padding: 0 var(--sp-md);
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
     }
 
     .section {

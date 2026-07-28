@@ -186,6 +186,7 @@
         <div class="container">
             <div class="reviews-controls__inner">
 
+                <!-- Pastilles cliquables — visibles desktop/tablette (≥769px) -->
                 <div class="reviews-filters">
                     <button class="filter-btn active" data-filter="tout">Tous les avis</button>
                     <button class="filter-btn" data-filter="coupe">✂️ Coupe</button>
@@ -193,6 +194,19 @@
                     <button class="filter-btn" data-filter="soin">🌿 Soin</button>
                     <button class="filter-btn" data-filter="coiffage">💫 Coiffage</button>
                     <button class="filter-btn" data-filter="barbe">🪒 Barbe</button>
+                </div>
+
+                <!-- Menu déroulant — visible mobile uniquement (≤768px) -->
+                <div class="reviews-filter-select">
+                    <label for="reviews-filter-mobile">Filtrer par prestation</label>
+                    <select id="reviews-filter-mobile" aria-label="Filtrer les avis par prestation">
+                        <option value="tout">Tous les avis</option>
+                        <option value="coupe">✂️ Coupe</option>
+                        <option value="coloration">🎨 Coloration</option>
+                        <option value="soin">🌿 Soin</option>
+                        <option value="coiffage">💫 Coiffage</option>
+                        <option value="barbe">🪒 Barbe</option>
+                    </select>
                 </div>
 
                 <div class="reviews-sort">

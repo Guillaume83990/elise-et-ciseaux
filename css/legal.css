@@ -1,12 +1,17 @@
 /* ============================================================
-   ÉLISE & CISEAUX — legal.css
+   ÉLISE & CISEAUX — legal.css — VERSION CORRIGÉE
    Pages Mentions légales & Politique de confidentialité
    ============================================================ */
 
 .legal {
     padding-top: calc(var(--header-h) + var(--sp-xl));
-    padding-bottom: var(--sp-3xl);
-    min-height: 80vh;
+    /* --sp-3xl n'existe pas dans le système de tokens (qui va
+       jusqu'à --sp-2xl) — la variable retombait silencieusement
+       à 0, écrasant tout l'espace avant le footer. Remplacé par
+       une valeur calculée à partir d'un token existant. */
+    padding-bottom: calc(var(--sp-2xl) + var(--sp-lg));
+    min-height: 80svh;
+    /* évite le saut lié à la barre d'adresse mobile (Safari iOS) */
 }
 
 .legal__hero {
@@ -16,7 +21,10 @@
 }
 
 .legal__title {
-    font-size: var(--fs-3xl);
+    /* Un seul clamp dédié au lieu d'un saut --fs-3xl → --fs-2xl
+       pile à 768px : la taille diminue en continu, sans à-coup
+       visible au redimensionnement. */
+    font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem);
     color: var(--clr-dark);
     margin-bottom: var(--sp-sm);
 }
@@ -91,10 +99,18 @@
     background: var(--clr-terra);
 }
 
+/* Zone "retour" : passée en flex avec gap plutôt qu'en marge
+   inline en dur — les boutons s'alignent proprement même s'ils
+   doivent passer à la ligne sur mobile (voir le second bouton
+   de politique-confidentialite.html, qui utilisait jusqu'ici un
+   margin-left inline non responsive). */
 .legal__back {
     padding-top: var(--sp-xl);
     border-top: 1px solid var(--clr-sand-mid);
     margin-top: var(--sp-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-sm);
 }
 
 /* Container étroit déjà défini dans style.css */
@@ -105,9 +121,21 @@
 @media (max-width: 768px) {
     .legal {
         padding-top: calc(var(--header-h) + var(--sp-lg));
+        padding-bottom: var(--sp-2xl);
     }
 
-    .legal__title {
-        font-size: var(--fs-2xl);
+    .legal__back .btn {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .legal__back {
+        flex-direction: column;
+    }
+
+    .legal__back .btn {
+        width: 100%;
     }
 }

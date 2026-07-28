@@ -1,5 +1,5 @@
 /* ============================================================
-   ÉLISE & CISEAUX — contact.css
+   ÉLISE & CISEAUX — contact.css — VERSION CORRIGÉE
    Page Contact & Rendez-vous
    ============================================================ */
 
@@ -21,7 +21,7 @@
     right: 2%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20rem;
+    font-size: clamp(9rem, 6rem + 9vw, 20rem);
     color: rgba(196, 113, 74, 0.07);
     pointer-events: none;
     line-height: 1;
@@ -36,9 +36,9 @@
 }
 
 .page-hero__title {
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
+    font-size: clamp(2.1rem, 1.5rem + 3vw, 4.5rem);
     color: var(--clr-dark);
-    line-height: 1.05;
+    line-height: 1.08;
 }
 
 .page-hero__title em {
@@ -103,6 +103,9 @@
 .contact-quick__value a {
     color: rgba(255, 255, 255, 0.85);
     transition: color 200ms;
+    /* zone tactile confortable pour les liens tel:/mailto: */
+    display: inline-block;
+    padding: 2px 0;
 }
 
 .contact-quick__value a:hover {
@@ -128,7 +131,7 @@
 .contact-main__grid {
     display: grid;
     grid-template-columns: 1fr 420px;
-    gap: var(--sp-2xl);
+    gap: clamp(2rem, 1.5rem + 2vw, var(--sp-2xl));
     align-items: start;
 }
 
@@ -167,8 +170,11 @@
 .form-tab {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 0.5em 1.1em;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px : élément de bascule important */
+    padding: 0 1.1em;
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-mid);
@@ -236,6 +242,13 @@
     width: 100%;
 }
 
+/* Zone tactile ≥ 44px pour tous les champs sauf la zone de
+   texte, qui a déjà sa propre min-height généreuse plus bas */
+.form-field input:not([type="checkbox"]),
+.form-field select {
+    min-height: var(--tap-min);
+}
+
 .form-field input::placeholder,
 .form-field textarea::placeholder {
     color: var(--clr-mid);
@@ -263,6 +276,17 @@
 
 .form-field--full {
     grid-column: 1 / -1;
+}
+
+/* Flèche personnalisée sur le select "Prestation souhaitée",
+   cohérente avec les autres sélecteurs du site */
+.form-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5744' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1em center;
+    padding-right: 2.5em;
 }
 
 /* Champ RDV (visible uniquement sur l'onglet RDV) */
@@ -296,8 +320,8 @@
 }
 
 .form-gdpr input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
     margin-top: 2px;
     accent-color: var(--clr-terra);
@@ -309,6 +333,9 @@
     color: var(--clr-mid);
     line-height: 1.6;
     cursor: pointer;
+    /* le label entier reste cliquable : compense la petite
+       taille visuelle de la case à cocher pour le confort tactile */
+    padding: 4px 0;
 }
 
 .form-gdpr a {
@@ -381,7 +408,7 @@
 .info-card {
     background: var(--clr-sand);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1.2vw, var(--sp-lg));
 }
 
 .info-card__title {
@@ -469,13 +496,16 @@
 .btn--map {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px */
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-terra);
     border: 1.5px solid var(--clr-terra-light);
     border-radius: var(--radius-pill);
-    padding: 0.5em 1.1em;
+    padding: 0 1.1em;
     transition: all 200ms var(--ease-out);
     align-self: flex-start;
 }
@@ -497,10 +527,13 @@
 .social-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px */
     font-size: var(--fs-sm);
     font-weight: 500;
-    padding: 0.45em 1em;
+    padding: 0 1em;
     border-radius: var(--radius-pill);
     transition: all 200ms var(--ease-out);
 }
@@ -626,7 +659,9 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-md);
-    padding: var(--sp-md) var(--sp-lg);
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px */
+    padding: var(--sp-sm) var(--sp-lg);
     cursor: pointer;
     font-size: var(--fs-base);
     font-weight: 500;
@@ -637,6 +672,11 @@
 
 .faq-question:hover {
     color: var(--clr-terra);
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid var(--clr-terra);
+    outline-offset: -2px;
 }
 
 .faq-question::after {
@@ -652,14 +692,15 @@
     transform: rotate(45deg);
 }
 
+/* max-height n'est plus fixé en dur ici : il est calculé
+   dynamiquement en JS via scrollHeight et posé en style inline,
+   ce qui garantit qu'aucune réponse — même plus longue à
+   l'avenir, ou enroulée sur davantage de lignes sur petit
+   écran — ne peut être tronquée silencieusement. */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 350ms var(--ease-out);
-}
-
-.faq-item.is-open .faq-answer {
-    max-height: 300px;
 }
 
 .faq-answer p {
@@ -771,6 +812,10 @@
 
     .faq-grid {
         grid-template-columns: 1fr;
+    }
+
+    .map-frame {
+        height: 280px;
     }
 
     .cta-strip__inner {

@@ -1,5 +1,5 @@
 /* ============================================================
-   ÉLISE & CISEAUX — galerie.css
+   ÉLISE & CISEAUX — galerie.css — VERSION CORRIGÉE (v2)
    Page Galerie — filtres + grille + lightbox
    ============================================================ */
 
@@ -18,7 +18,7 @@
     right: 4%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 18rem;
+    font-size: clamp(8rem, 6rem + 8vw, 18rem);
     color: rgba(196, 113, 74, 0.07);
     pointer-events: none;
     line-height: 1;
@@ -32,9 +32,9 @@
 }
 
 .page-hero__title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.25rem, 1.6rem + 3vw, 4.5rem);
     color: var(--clr-dark);
-    line-height: 1.05;
+    line-height: 1.08;
 }
 
 .page-hero__title em {
@@ -53,7 +53,7 @@
 
 /* ── FILTRES ────────────────────────────────────────────────── */
 .gallery-filters {
-    padding: var(--sp-lg) 0;
+    padding: var(--sp-md) 0;
     background: var(--clr-white);
     border-bottom: 1px solid var(--clr-sand-mid);
     position: sticky;
@@ -66,13 +66,16 @@
     align-items: center;
     gap: var(--sp-sm);
     flex-wrap: wrap;
+    row-gap: var(--sp-xs);
 }
 
 .filter-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 0.5em 1.2em;
+    min-height: var(--tap-min);
+    padding: 0 1.2em;
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-mid);
@@ -112,6 +115,7 @@
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    align-items: start;
     gap: 20px;
 }
 
@@ -128,12 +132,17 @@
     flex-direction: column;
 }
 
-.gallery-item:hover {
+.gallery-item:hover,
+.gallery-item:focus-visible {
     transform: translateY(-5px);
     box-shadow: 0 12px 36px rgba(42, 33, 24, 0.14);
 }
 
-/* Zone image avec ratio fixe */
+.gallery-item:focus-visible {
+    outline: 2px solid var(--clr-terra);
+    outline-offset: 2px;
+}
+
 .gallery-item__img-wrap {
     position: relative;
     aspect-ratio: 4 / 3;
@@ -141,7 +150,6 @@
     background: var(--clr-sand-mid);
 }
 
-/* Variation de ratio pour dynamiser la grille */
 .gallery-item:nth-child(4n+1) .gallery-item__img-wrap {
     aspect-ratio: 4 / 5;
 }
@@ -162,7 +170,6 @@
     transform: scale(1.06);
 }
 
-/* Overlay zoom au hover */
 .gallery-item__overlay {
     position: absolute;
     inset: 0;
@@ -181,16 +188,17 @@
     transition: opacity 280ms, transform 280ms var(--ease-out);
 }
 
-.gallery-item:hover .gallery-item__overlay {
+.gallery-item:hover .gallery-item__overlay,
+.gallery-item:focus-visible .gallery-item__overlay {
     background: rgba(42, 33, 24, 0.32);
 }
 
-.gallery-item:hover .gallery-item__overlay-icon {
+.gallery-item:hover .gallery-item__overlay-icon,
+.gallery-item:focus-visible .gallery-item__overlay-icon {
     opacity: 1;
     transform: scale(1);
 }
 
-/* Pied de carte */
 .gallery-item__footer {
     padding: var(--sp-sm) var(--sp-md);
     display: flex;
@@ -206,6 +214,11 @@
     color: var(--clr-dark);
     font-style: italic;
     line-height: 1.2;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .gallery-item__tag {
@@ -221,21 +234,6 @@
     flex-shrink: 0;
 }
 
-.gallery-item:hover .gallery-item__overlay-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.gallery-item:hover .gallery-item__overlay-label {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.gallery-item:hover .gallery-item__tag {
-    opacity: 0;
-}
-
-/* Item masqué par filtre */
 .gallery-item.is-hidden {
     display: none;
 }
@@ -253,6 +251,11 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--ease-out);
+    overflow: hidden;
+    /* verrou anti scroll-horizontal parasite */
+    /* réserve toujours la place des flèches fixes, sur les côtés */
+    padding: var(--sp-lg) calc(var(--sp-lg) + 56px);
+    box-sizing: border-box;
 }
 
 .lightbox.is-open {
@@ -260,18 +263,29 @@
     pointer-events: all;
 }
 
+/* CORRECTIF PRINCIPAL : sans flex-direction, ce wrapper flex
+   restait en row par défaut. Le JS injecte l'image PUIS la
+   légende comme deux enfants — en row, la légende partait à
+   côté de l'image et sortait de l'écran sur mobile.
+   → column : l'image et la légende sont maintenant empilées. */
 .lightbox__img-wrap {
     position: relative;
-    max-width: 88vw;
-    max-height: 86vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: var(--sp-md);
+    width: 100%;
+    max-width: 88vw;
+    max-height: 100%;
 }
 
 .lightbox__img {
-    max-width: 88vw;
-    max-height: 80vh;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 68vh;
     object-fit: contain;
     border-radius: var(--radius-md);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
@@ -279,41 +293,26 @@
     transition: transform 350ms var(--ease-out);
 }
 
-.lightbox__ph {
-    width: min(600px, 88vw);
-    height: min(420px, 60vh);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--ff-display);
-    font-style: italic;
-    font-size: var(--fs-xl);
-    color: rgba(255, 255, 255, 0.65);
-    transform: scale(0.94);
-    transition: transform 350ms var(--ease-out);
-}
-
-.lightbox.is-open .lightbox__img,
-.lightbox.is-open .lightbox__ph {
+.lightbox.is-open .lightbox__img {
     transform: scale(1);
 }
 
-/* Caption */
+/* Légende en flux normal sous l'image, largeur bridée pour ne
+   jamais forcer l'élargissement du wrapper au-delà de l'image */
 .lightbox__caption {
-    position: absolute;
-    bottom: -44px;
-    left: 0;
-    right: 0;
+    max-width: min(90vw, 500px);
     text-align: center;
     font-size: var(--fs-sm);
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.65);
     font-style: italic;
+    line-height: 1.5;
 }
 
-/* Boutons navigation */
+/* Boutons de navigation — fixes au viewport, jamais relatifs
+   à l'image ou au wrapper : ne peuvent plus sortir de l'écran,
+   quelle que soit la largeur de fenêtre ou celle de l'image. */
 .lightbox__btn {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     width: 48px;
@@ -337,11 +336,11 @@
 }
 
 .lightbox__prev {
-    left: -64px;
+    left: var(--sp-lg);
 }
 
 .lightbox__next {
-    right: -64px;
+    right: var(--sp-lg);
 }
 
 /* Bouton fermer */
@@ -390,6 +389,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-lg);
+    flex-wrap: wrap;
 }
 
 .cta-strip__title {
@@ -410,6 +410,7 @@
 .cta-strip__actions {
     display: flex;
     gap: var(--sp-md);
+    flex-wrap: wrap;
     flex-shrink: 0;
 }
 
@@ -434,17 +435,24 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 900px) {
-    .gallery-grid {
-        columns: 2;
+@media (max-width: 1024px) {
+    .lightbox {
+        padding-left: var(--sp-md);
+        padding-right: var(--sp-md);
     }
 
     .lightbox__prev {
-        left: -52px;
+        left: var(--sp-md);
     }
 
     .lightbox__next {
-        right: -52px;
+        right: var(--sp-md);
+    }
+}
+
+@media (max-width: 900px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -462,20 +470,29 @@
         display: none;
     }
 
-    .lightbox__prev,
-    .lightbox__next {
-        position: fixed;
+    /* Flèches remontées en barre basse, image réduite pour
+       garantir : image + légende + flèches tiennent sans jamais
+       se chevaucher, même sur petit écran */
+    .lightbox {
+        padding: var(--sp-lg) var(--sp-md) calc(var(--sp-lg) + 56px);
+    }
+
+    .lightbox__img {
+        max-height: 56vh;
+    }
+
+    .lightbox__btn {
         top: auto;
         bottom: var(--sp-lg);
         transform: none;
     }
 
     .lightbox__prev {
-        left: var(--sp-lg);
+        left: var(--sp-md);
     }
 
     .lightbox__next {
-        right: var(--sp-lg);
+        right: var(--sp-md);
     }
 
     .cta-strip__inner {
@@ -491,6 +508,29 @@
 
 @media (max-width: 480px) {
     .gallery-grid {
-        columns: 1;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .lightbox__btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .cta-strip__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-strip__actions .btn {
+        width: 100%;
+    }
+}
+
+/* Écrans très courts (mobile en paysage) : encore moins de
+   hauteur dispo pour l'image, on la contraint davantage */
+@media (max-height: 480px) {
+    .lightbox__img {
+        max-height: 46vh;
     }
 }

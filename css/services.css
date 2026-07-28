@@ -1,9 +1,14 @@
 /* ============================================================
-   ÉLISE & CISEAUX — services.css
+   ÉLISE & CISEAUX — services.css — VERSION CORRIGÉE
    Page Prestations & Tarifs
    ============================================================ */
 
-/* ── PAGE HERO (bandeau simple, pas de photo pleine largeur) ── */
+:root {
+    --services-nav-h: 56px;
+    /* hauteur approx. de la nav sticky secondaire */
+}
+
+/* ── PAGE HERO ──────────────────────────────────────────────── */
 .page-hero {
     padding-top: calc(var(--header-h) + var(--sp-2xl));
     padding-bottom: var(--sp-2xl);
@@ -12,14 +17,13 @@
     overflow: hidden;
 }
 
-/* Motif décoratif léger en fond */
 .page-hero::after {
     content: '✂';
     position: absolute;
     right: -2%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 22rem;
+    font-size: clamp(10rem, 8rem + 10vw, 22rem);
     color: rgba(196, 113, 74, 0.06);
     pointer-events: none;
     line-height: 1;
@@ -33,9 +37,9 @@
 }
 
 .page-hero__title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.25rem, 1.6rem + 3vw, 4.5rem);
     color: var(--clr-dark);
-    line-height: 1.05;
+    line-height: 1.08;
 }
 
 .page-hero__title em {
@@ -70,9 +74,11 @@
     gap: 0;
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 var(--sp-lg);
+    padding: 0 var(--container-pad);
+    /* cohérent avec .container fluide */
 }
 
 .services-nav__inner::-webkit-scrollbar {
@@ -83,7 +89,9 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: var(--sp-md) var(--sp-lg);
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px, même hors .btn */
+    padding: 0 var(--sp-md);
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-mid);
@@ -101,6 +109,18 @@
 .services-nav__link.active {
     color: var(--clr-terra);
     border-bottom-color: var(--clr-terra);
+}
+
+/* Toutes les sections ciblées par la nav sticky ont besoin d'un
+   offset supplémentaire (header + nav secondaire), sinon le titre
+   atterrit caché sous .services-nav au clic/scroll. */
+#coupe,
+#coloration,
+#soins,
+#coiffage,
+#barbe,
+#equipe {
+    scroll-margin-top: calc(var(--header-h) + var(--services-nav-h) + 12px);
 }
 
 /* ── SECTION PRESTATION ─────────────────────────────────────── */
@@ -125,19 +145,21 @@
 }
 
 .prestation__icon {
-    width: 64px;
-    height: 64px;
+    width: clamp(52px, 3rem + 1vw, 64px);
+    height: clamp(52px, 3rem + 1vw, 64px);
     background: var(--clr-terra);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     flex-shrink: 0;
 }
 
 .prestation__head-text {
     flex: 1;
+    min-width: 0;
+    /* évite tout débordement de texte en flex */
 }
 
 .prestation__name {
@@ -163,8 +185,10 @@
     background: var(--clr-white);
     border: 1px solid var(--clr-sand-mid);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1.2vw, var(--sp-lg));
     position: relative;
+    display: flex;
+    flex-direction: column;
     transition: border-color 250ms, box-shadow 250ms, transform 250ms var(--ease-out);
 }
 
@@ -174,7 +198,6 @@
     transform: translateY(-3px);
 }
 
-/* Badge "Populaire" */
 .tarif-card--popular {
     border-color: var(--clr-terra);
 }
@@ -205,7 +228,8 @@
     color: var(--clr-mid);
     line-height: 1.6;
     margin-bottom: var(--sp-md);
-    min-height: 3em;
+    flex-grow: 1;
+    /* pousse prix/durée en bas, quelle que soit la longueur du texte */
 }
 
 .tarif-card__price {
@@ -241,7 +265,6 @@
     font-size: 0.8em;
 }
 
-/* Séparateur visuel dans la section */
 .prestation__note {
     margin-top: var(--sp-lg);
     padding: var(--sp-md) var(--sp-lg);
@@ -311,31 +334,6 @@
     transform: scale(1.04);
 }
 
-/* Placeholder photo équipe */
-.team-card__photo-ph {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--ff-display);
-    font-style: italic;
-    font-size: var(--fs-lg);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.team-card__photo-ph--1 {
-    background: linear-gradient(135deg, var(--clr-terra), #8a4a2a);
-}
-
-.team-card__photo-ph--2 {
-    background: linear-gradient(135deg, var(--clr-sage), #4a6e4d);
-}
-
-.team-card__photo-ph--3 {
-    background: linear-gradient(135deg, #7a6a5a, #4a3a2a);
-}
-
 .team-card__body {
     padding: var(--sp-md) var(--sp-lg);
 }
@@ -372,6 +370,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-lg);
+    flex-wrap: wrap;
 }
 
 .cta-strip__title {
@@ -392,6 +391,7 @@
 .cta-strip__actions {
     display: flex;
     gap: var(--sp-md);
+    flex-wrap: wrap;
     flex-shrink: 0;
 }
 
@@ -416,11 +416,13 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .prestation__grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
 
+@media (max-width: 900px) {
     .team__grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -434,6 +436,10 @@
 }
 
 @media (max-width: 768px) {
+    :root {
+        --services-nav-h: 48px;
+    }
+
     .page-hero__inner {
         flex-direction: column;
         align-items: flex-start;
@@ -467,12 +473,22 @@
     }
 
     .services-nav__link {
-        padding: var(--sp-sm) var(--sp-md);
+        padding: 0 var(--sp-sm);
     }
 }
 
 @media (max-width: 480px) {
     .prestation__head {
         flex-direction: column;
+        gap: var(--sp-sm);
+    }
+
+    .cta-strip__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-strip__actions .btn {
+        width: 100%;
     }
 }

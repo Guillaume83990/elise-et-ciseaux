@@ -1,5 +1,5 @@
 /* ============================================================
-   ÉLISE & CISEAUX — galerie.js
+   ÉLISE & CISEAUX — galerie.js — VERSION CORRIGÉE
    Filtres par catégorie + Lightbox navigation clavier/tactile
    ============================================================ */
 
@@ -21,11 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter');
 
-            // Activer le bouton cliqué
-            filterBtns.forEach(b => b.classList.remove('active'));
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
-            // Filtrer les items
             items.forEach(item => {
                 const cat = item.getAttribute('data-cat');
                 if (filter === 'tout' || cat === filter) {
@@ -56,45 +58,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentIndex = 0;
     let visibleItems = [];
+    let lastFocusedItem = null;
 
-    // Ouvre la lightbox sur l'item cliqué
-    const openLightbox = (index) => {
+    const openLightbox = (index, triggerEl) => {
         visibleItems = [...document.querySelectorAll('.gallery-item:not(.is-hidden)')];
         currentIndex = index;
+        lastFocusedItem = triggerEl || document.activeElement;
         renderLightbox();
         lightbox.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        lbClose?.focus();
     };
 
     const closeLightbox = () => {
         lightbox.classList.remove('is-open');
         document.body.style.overflow = '';
+        // Rend le focus à l'élément d'origine (accessibilité clavier)
+        lastFocusedItem?.focus();
     };
 
     const renderLightbox = () => {
         const item = visibleItems[currentIndex];
         const img = item?.querySelector('img');
-        const ph = item?.querySelector('.gallery-item__ph');
         const caption = item?.getAttribute('data-caption') || '';
 
-        // Vide le contenu précédent
         lbImgWrap.innerHTML = '';
 
         if (img) {
-            // Vraie image
             const newImg = document.createElement('img');
             newImg.src = img.src;
             newImg.alt = img.alt;
             newImg.className = 'lightbox__img';
             lbImgWrap.appendChild(newImg);
-        } else if (ph) {
-            // Placeholder
-            const newPh = ph.cloneNode(true);
-            newPh.className = `lightbox__ph ${[...ph.classList].filter(c => c.startsWith('ph-')).join(' ')}`;
-            lbImgWrap.appendChild(newPh);
         }
 
-        // Caption
         if (caption) {
             const cap = document.createElement('div');
             cap.className = 'lightbox__caption';
@@ -102,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lbImgWrap.appendChild(cap);
         }
 
-        // Compteur
         if (lbCounter) {
             lbCounter.textContent = `${currentIndex + 1} / ${visibleItems.length}`;
         }
@@ -113,30 +109,37 @@ document.addEventListener('DOMContentLoaded', () => {
         renderLightbox();
     };
 
-    // Bind sur chaque item de la grille
     const bindItems = () => {
-        document.querySelectorAll('.gallery-item').forEach((item, i) => {
+        document.querySelectorAll('.gallery-item').forEach((item) => {
             item.addEventListener('click', () => {
                 visibleItems = [...document.querySelectorAll('.gallery-item:not(.is-hidden)')];
                 const visibleIndex = visibleItems.indexOf(item);
-                if (visibleIndex !== -1) openLightbox(visibleIndex);
+                if (visibleIndex !== -1) openLightbox(visibleIndex, item);
+            });
+
+            // Ouverture au clavier (Entrée / Espace) — les items sont
+            // focusables via tabindex="0", il leur manquait ce handler
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    visibleItems = [...document.querySelectorAll('.gallery-item:not(.is-hidden)')];
+                    const visibleIndex = visibleItems.indexOf(item);
+                    if (visibleIndex !== -1) openLightbox(visibleIndex, item);
+                }
             });
         });
     };
 
     bindItems();
 
-    // Contrôles
     lbClose?.addEventListener('click', closeLightbox);
     lbPrev?.addEventListener('click', () => goTo(-1));
     lbNext?.addEventListener('click', () => goTo(+1));
 
-    // Fermer en cliquant hors de l'image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // Clavier
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('is-open')) return;
         if (e.key === 'Escape') closeLightbox();
@@ -144,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowRight') goTo(+1);
     });
 
-    // Swipe tactile
     let touchStartX = 0;
 
     lightbox.addEventListener('touchstart', (e) => {

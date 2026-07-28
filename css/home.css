@@ -1,9 +1,8 @@
 /* ============================================================
-   ÉLISE & CISEAUX — home.css
-   Niveau : Site Vitrine Essentiel 600€ — qualité Voltaire Élec
+   ÉLISE & CISEAUX — home.css — VERSION CORRIGÉE
    ============================================================ */
 
-/* ── HÉRO — pleine largeur, photo en fond ───────────────────── */
+/* ── HÉRO ──────────────────────────────────────────────────── */
 .hero {
     position: relative;
     min-height: 100svh;
@@ -25,12 +24,6 @@
     object-fit: cover;
 }
 
-.hero__bg-ph {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #b8845a 0%, #8f9e75 40%, #c4a882 70%, #a87a5a 100%);
-}
-
 .hero__overlay {
     position: absolute;
     inset: 0;
@@ -46,7 +39,7 @@
     z-index: 2;
     max-width: 1100px;
     margin: 0 auto;
-    padding: var(--sp-2xl) var(--sp-lg);
+    padding: var(--sp-2xl) var(--container-pad);
     width: 100%;
 }
 
@@ -73,9 +66,9 @@
 }
 
 .hero__title {
-    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-size: clamp(2.4rem, 1.7rem + 3.2vw, 5.5rem);
     color: #fff;
-    line-height: 1.05;
+    line-height: 1.08;
     max-width: 700px;
     margin-bottom: var(--sp-md);
     animation: fadeUp 0.7s var(--ease-out) 0.25s both;
@@ -88,7 +81,7 @@
 }
 
 .hero__desc {
-    font-size: var(--fs-md);
+    font-size: clamp(0.95rem, 0.85rem + 0.4vw, var(--fs-md));
     color: rgba(255, 255, 255, 0.82);
     max-width: 500px;
     line-height: 1.7;
@@ -103,9 +96,15 @@
     animation: fadeUp 0.7s var(--ease-out) 0.55s both;
 }
 
-/* Stats en bas du héro */
+.hero__actions .btn {
+    flex: 1 1 auto;
+}
+
+/* Stats — grille responsive : 4 colonnes desktop → 2×2 mobile,
+   plus de chevauchement/tassement sur petits écrans */
 .hero__stats {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
     gap: var(--sp-xl);
     margin-top: var(--sp-2xl);
     padding-top: var(--sp-lg);
@@ -115,11 +114,12 @@
 
 .hero__stat-num {
     font-family: var(--ff-display);
-    font-size: var(--fs-3xl);
+    font-size: clamp(1.75rem, 1.5rem + 1.2vw, var(--fs-3xl));
     color: #fff;
     font-weight: 600;
     line-height: 1;
     display: block;
+    white-space: nowrap;
 }
 
 .hero__stat-suffix {
@@ -133,6 +133,7 @@
     color: rgba(255, 255, 255, 0.5);
     margin-top: 4px;
     display: block;
+    white-space: nowrap;
 }
 
 /* ── SERVICES ───────────────────────────────────────────────── */
@@ -153,7 +154,7 @@
 .service-card {
     background: var(--clr-sand);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1.2vw, var(--sp-lg));
     border: 1px solid var(--clr-sand-mid);
     transition: border-color 250ms, box-shadow 250ms, transform 250ms var(--ease-out);
     position: relative;
@@ -210,6 +211,8 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    padding: 0.4rem 0;
+    /* confort tactile */
     transition: gap 200ms;
 }
 
@@ -243,20 +246,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.zone__photo-ph {
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-    background: linear-gradient(135deg, var(--clr-sage-light), var(--clr-terra-light));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--ff-display);
-    font-style: italic;
-    font-size: var(--fs-lg);
-    color: var(--clr-mid);
 }
 
 .zone__text .section-title {
@@ -325,12 +314,13 @@
     gap: 12px;
 }
 
-/* Grande photo, spans 2 lignes */
 .realization__main {
     grid-column: 1;
     grid-row: 1 / 3;
     border-radius: var(--radius-md);
     overflow: hidden;
+    aspect-ratio: 3/4;
+    /* remplace min-height fixe : ratio stable à toutes tailles */
 }
 
 .realization__main img,
@@ -338,7 +328,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    min-height: 420px;
 }
 
 .realization__sub {
@@ -354,11 +343,10 @@
     object-fit: cover;
 }
 
-/* Fiche technique */
 .realization__info {
     background: var(--clr-sand);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1vw, var(--sp-lg));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -392,7 +380,6 @@
     margin-bottom: var(--sp-sm);
 }
 
-/* Placeholders photos */
 .ph {
     display: flex;
     align-items: center;
@@ -425,6 +412,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: var(--sp-md);
     margin-bottom: var(--sp-xl);
 }
 
@@ -437,7 +425,7 @@
 .review-card {
     background: var(--clr-white);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1.2vw, var(--sp-lg));
     border: 1px solid var(--clr-sand-mid);
     transition: box-shadow 250ms, transform 250ms var(--ease-out);
 }
@@ -505,6 +493,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-lg);
+    flex-wrap: wrap;
 }
 
 .cta-strip__title {
@@ -526,17 +515,8 @@
 .cta-strip__actions {
     display: flex;
     gap: var(--sp-md);
+    flex-wrap: wrap;
     flex-shrink: 0;
-}
-
-.btn--outline-light {
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    color: var(--clr-white);
-}
-
-.btn--outline-light:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.55);
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
@@ -547,7 +527,7 @@
 
     .realization__main {
         grid-row: auto;
-        min-height: 280px;
+        aspect-ratio: 16/9;
     }
 
     .realization__info {
@@ -582,13 +562,8 @@
 }
 
 @media (max-width: 768px) {
-    .hero__title {
-        font-size: 2.6rem;
-    }
-
     .hero__stats {
-        gap: var(--sp-md);
-        flex-wrap: wrap;
+        gap: var(--sp-md) var(--sp-lg);
     }
 
     .services__grid {
@@ -618,8 +593,8 @@
         grid-column: 1;
     }
 
-    .realization__main .ph {
-        min-height: 260px;
+    .realization__main {
+        aspect-ratio: 4/3;
     }
 
     .cta-strip__inner {
@@ -629,7 +604,20 @@
 
     .cta-strip__actions {
         justify-content: center;
-        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 560px) {
+
+    /* Stats en 2×2 propre — évite tout tassement sur iPhone SE/mini */
+    .hero__stats {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: var(--sp-lg);
+        column-gap: var(--sp-md);
+    }
+
+    .zone__list {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -641,5 +629,14 @@
     .hero__actions .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .cta-strip__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-strip__actions .btn {
+        width: 100%;
     }
 }

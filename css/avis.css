@@ -1,6 +1,12 @@
 /* ============================================================
-   ÉLISE & CISEAUX — avis.css
+   ÉLISE & CISEAUX — avis.css — VERSION CORRIGÉE (v5)
+   Filtres : pastilles desktop/tablette, select natif mobile
    ============================================================ */
+
+:root {
+    --reviews-controls-h: 64px;
+    /* hauteur approx. de la barre filtres/tri sticky */
+}
 
 /* ────────────────────────────────────────────────────────────
    BANDEAU PAGE
@@ -20,7 +26,7 @@
     right: 2%;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20rem;
+    font-size: clamp(9rem, 6rem + 9vw, 20rem);
     color: rgba(196, 113, 74, 0.07);
     pointer-events: none;
     line-height: 1;
@@ -35,9 +41,9 @@
 }
 
 .page-hero__title {
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
+    font-size: clamp(2.1rem, 1.5rem + 3vw, 4.5rem);
     color: var(--clr-dark);
-    line-height: 1.05;
+    line-height: 1.08;
 }
 
 .page-hero__title em {
@@ -91,7 +97,7 @@
 
 .rating-score__number {
     font-family: var(--ff-display);
-    font-size: 5rem;
+    font-size: clamp(3.25rem, 2.6rem + 2.5vw, 5rem);
     line-height: 1;
     color: var(--clr-dark);
     font-weight: 600;
@@ -106,6 +112,7 @@
 .rating-score__total {
     font-size: var(--fs-sm);
     color: var(--clr-mid);
+    white-space: nowrap;
 }
 
 /* Barres de repartition */
@@ -218,7 +225,7 @@
 }
 
 /* ────────────────────────────────────────────────────────────
-   FILTRES + TRI
+   FILTRES + TRI (sticky)
 ──────────────────────────────────────────────────────────── */
 
 .reviews-controls {
@@ -239,6 +246,9 @@
     min-width: 0;
 }
 
+/* Pastilles — desktop/tablette : simple scroll horizontal si
+   jamais ça déborde, sans astuce de fondu. À ces largeurs, la
+   place ne manque pas et les 6 boutons tiennent normalement. */
 .reviews-filters {
     display: flex;
     gap: 8px;
@@ -246,7 +256,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 2px;
-    flex-shrink: 1;
+    flex: 1 1 auto;
     min-width: 0;
 }
 
@@ -257,8 +267,11 @@
 .filter-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
-    padding: 0.4em 0.9em;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px */
+    padding: 0 0.9em;
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-mid);
@@ -282,6 +295,48 @@
     border-color: var(--clr-terra);
 }
 
+/* Menu déroulant mobile — masqué par défaut, activé uniquement
+   sous 768px. Plus de scroll horizontal à gérer sur mobile :
+   plus de fondu, plus de bord tronqué possible, aucun bug résiduel. */
+.reviews-filter-select {
+    display: none;
+    width: 100%;
+}
+
+.reviews-filter-select label {
+    display: block;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--clr-dark);
+    margin-bottom: 6px;
+}
+
+.reviews-filter-select select {
+    width: 100%;
+    min-height: var(--tap-min);
+    font-family: var(--ff-body);
+    font-size: var(--fs-sm);
+    color: var(--clr-dark);
+    background: var(--clr-sand);
+    border: 1.5px solid var(--clr-sand-mid);
+    border-radius: var(--radius-md);
+    padding: 0 1em;
+    cursor: pointer;
+    transition: border-color 200ms;
+    /* Flèche personnalisée, cohérente avec le reste du site */
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5744' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1em center;
+    padding-right: 2.5em;
+}
+
+.reviews-filter-select select:focus {
+    outline: none;
+    border-color: var(--clr-terra);
+}
+
 .reviews-sort {
     display: flex;
     align-items: center;
@@ -302,7 +357,9 @@
     background: var(--clr-sand);
     border: 1.5px solid var(--clr-sand-mid);
     border-radius: var(--radius-sm);
-    padding: 0.4em 0.8em;
+    min-height: var(--tap-min);
+    /* zone tactile ≥ 44px, iOS/Android */
+    padding: 0 0.8em;
     cursor: pointer;
     transition: border-color 200ms;
 }
@@ -332,6 +389,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--sp-lg);
+    /* align-items reste "stretch" (par défaut) volontairement ici :
+       contrairement à la galerie, on VEUT que les cartes s'étirent
+       à la même hauteur de ligne, pour que le pied "auteur" de
+       chaque carte s'aligne parfaitement (via margin-top:auto). */
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -341,7 +402,7 @@
 .review-card {
     background: var(--clr-white);
     border-radius: var(--radius-md);
-    padding: var(--sp-lg);
+    padding: clamp(1.25rem, 1rem + 1.2vw, var(--sp-lg));
     box-shadow: 0 2px 12px rgba(42, 33, 24, 0.06);
     display: flex;
     flex-direction: column;
@@ -355,7 +416,7 @@
 .review-card::before {
     content: "\201C";
     font-family: var(--ff-display);
-    font-size: 7rem;
+    font-size: clamp(4.5rem, 3.5rem + 4vw, 7rem);
     line-height: 1;
     color: rgba(196, 113, 74, 0.07);
     position: absolute;
@@ -491,6 +552,10 @@
 .leave-review {
     background: var(--clr-dark);
     padding: var(--sp-2xl) 0;
+    /* Compense le header fixe + la barre filtres/tri sticky :
+       sans cet offset, cliquer sur "Laisser un avis" fait
+       atterrir ce titre caché sous .reviews-controls. */
+    scroll-margin-top: calc(var(--header-h) + var(--reviews-controls-h) + 12px);
 }
 
 .leave-review__inner {
@@ -625,6 +690,11 @@
 }
 
 @media (max-width: 768px) {
+    :root {
+        --reviews-controls-h: 116px;
+        /* select filtre + select tri empilés = 2 lignes */
+    }
+
     .page-hero::after {
         display: none;
     }
@@ -661,8 +731,24 @@
         gap: var(--sp-sm);
     }
 
+    /* Bascule complète : pastilles → menu déroulant natif. Plus
+       de scroll horizontal caché à gérer sur mobile, donc plus
+       aucun risque de contenu tronqué ou de fondu qui échoue. */
+    .reviews-filters {
+        display: none;
+    }
+
+    .reviews-filter-select {
+        display: block;
+    }
+
     .reviews-sort {
-        justify-content: flex-end;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .reviews-sort select {
+        flex: 1;
     }
 
     .reviews-grid {
